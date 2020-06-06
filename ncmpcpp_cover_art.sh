@@ -1,15 +1,17 @@
 #!/bin/sh
+# Cover art script for ncmpcpp-ueberzug
 
 # SETTINGS
 music_library="$HOME/music"
 fallback_image="$HOME/.ncmpcpp/ncmpcpp-ueberzug/fallback.png"
-
 padding_top=3 # These values are in characters
 padding_bottom=1
 padding_right=2
 reserved_playlist_cols=30
 
-# Set this if the geometries are wrong or ncmpcpp shouts at you to do it
+# Only set this if the geometries are wrong or ncmpcpp shouts at you to do it.
+# Visually select/highlight a character on your terminal, zoom in an image 
+# editor and count how many pixels a character's width and height are.
 font_height=
 font_width=
 
@@ -149,42 +151,46 @@ f.close()
     rm "/tmp/ncmpcpp_geometry.txt"
     #yad --text "py $term_height $term_width"
 
-    if is_font_size_successfully_set; then
+    if is_font_size_successfully_computed; then
         echo "py $term_width $term_height $$"
         return
     fi
 
-    if is_installed wmctrl; then
-        term_width=$(wmctrl -lG |
-            awk '$8 == "ncmpcpp" && $9=="" {print $5; exit}')
-        term_height=$(wmctrl -lG |
-            awk '$8 == "ncmpcpp" && $9=="" {print $6; exit}')
+    # If the Python method doesn't work, chances are
+    # that Ueberzug will be broken on that terminal,
+    # but we provide two alternate methods as 
+#    if is_installed wmctrl; then
+        #term_width=$(wmctrl -lG |
+            #awk '$8 == "ncmpcpp" && $9=="" {print $5; exit}')
+        #term_height=$(wmctrl -lG |
+            #awk '$8 == "ncmpcpp" && $9=="" {print $6; exit}')
 
-        if is_font_size_successfully_set; then
-            echo "wmctrl $term_width $term_height $$"
-            return
+        #if is_font_size_successfully_computed; then
+            #echo "wmctrl $term_width $term_height $$"
+            #return
+        #fi
+    #fi
+
+    #if is_installed xdotool; then
+        #term_windowid=$(xdotool search --name "ncmpcpp")
+        #term_geometry=$(xdotool getwindowgeometry "$term_windowid")
+        #term_width=$(echo "$term_geometry" | awk -F"[ x]" 'NR==3{print $4}')
+        #term_height=$(echo "$term_geometry" | awk -F"[ x]" 'NR==3{print $5}')
+        #if is_font_size_successfully_computed; then
+            #echo "xdotool $term_width $term_height $$"
+            #return
+        #fi
+    #fi
+        if ! is_font_size_successfully_computed; then
+            echo "Failed to guess font size, try setting it in ncmpcpp_cover_art.sh settings"
         fi
-    fi
-
-    if is_installed xdotool; then
-        term_windowid=$(xdotool search --name "ncmpcpp")
-        term_geometry=$(xdotool getwindowgeometry "$term_windowid")
-        term_width=$(echo "$term_geometry" | awk -F"[ x]" 'NR==3{print $4}')
-        term_height=$(echo "$term_geometry" | awk -F"[ x]" 'NR==3{print $5}')
-
-        if is_font_size_successfully_set; then
-            echo "xdotool $term_width $term_height $$"
-            return
-        fi
-    fi
-
 }
 
 is_installed() {
     type $1 >/dev/null 2>&1
 }
 
-is_font_size_successfully_set() {
+is_font_size_successfully_computed() {
     [ -n "$term_height" ] && [ -n "$term_width" ] &&
         [ "$term_height" != "0" ] && [ "$term_width" != "0" ]
 }
