@@ -4,9 +4,11 @@
 
 **This is a work in progress! Not ready for distribution.**
 
-ncmpcpp-ueberzug is a POSIX shell script displaying ncmpcpp album art using [ueberzug](https://github.com/seebye/ueberzug). It works on `alacritty`, `st`, `urxvt`,  `kitty`, `xterm` and `lxterm`.
+`ncmpcpp-ueberzug` is a POSIX shell script displaying ncmpcpp album art using [ueberzug](https://github.com/seebye/ueberzug). It works on `alacritty`, `st`, `urxvt`,  `kitty`, `xterm` and `lxterm`.
 
 ## How to install
+
+First install [Ueberzug](https://github.com/seebye/ueberzug) as per the official instructions.
 
 Navigate to your ncmpcpp config folder and clone the repository: 
 ```sh
@@ -24,7 +26,7 @@ Open your ncmpcpp config at `~/.ncmpcpp/config` and add this line:
 execute_on_song_change="~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
 ```
 
-Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script according to your setup:
+Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script to suit to your setup:
 ```sh
 # SETTINGS
 music_library="$HOME/music"
@@ -39,11 +41,10 @@ The `padding_` and `reserved_playlist_cols` values are in *characters*, here is 
 
 `reserved_playlist_cols` is the number of columns you want to protect from the cover image such that it will not be covered by it. [The cover image will be truncated so as not to cover that area.](img/truncate_reserved_cols.gif)
 
-Now, simply run `./ncmpcpp-ueberzug` or `~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug` to open ncmpcpp with album art enabled. If you want to be able to simply run `ncmpcpp-ueberzug` instead of its full path, simply move or symlink it somewhere in your $PATH, for example:
+Now, simply run `./ncmpcpp-ueberzug` or `~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug` to open ncmpcpp with album art enabled. If you want to be able to run just `ncmpcpp-ueberzug` instead of its full path, move or symlink it somewhere in your $PATH, for example:
 ```sh
 ln -s ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug ~/.local/bin/
 ```
-
 
 ## Compatibility
 
