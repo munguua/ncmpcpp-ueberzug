@@ -30,14 +30,12 @@ Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script to 
 | --- | --- |
 | `music_library` | Path to your mpd library |
 | `fallback_image` | Path to fallback image in case of no cover found |
-| `padding_top`, `padding_bottom`, `padding_right` | Padding of the cover image |
+| `padding_top`, `padding_bottom`, `padding_right` | Padding of the cover image (measured in characters) |
 | `max_width` | Cover art will not expand past this limit (measured in characters) |
 | `reserved_playlist_cols` | Columns on the left that the cover image is not allowed to encroach on |
 | `reserved_cols_in_percent` | If set to `"false"`, `reserved_playlist_cols` will be measured in *characters*, if set to `"true"`, it will be measured in *percent of window width* |
 | `force_square="false"` | If set to `"false"`, cover art will be cropped horizontally when encroaching on `reserved_playlist_cols`; if set to `"true"`, it will downsize proportionally. |
 | `square_alignment="top"` | Specifies the vertical alignment of the cover art if downsized by `forced_square`. Can be `"top"`, `"center"` or "`bottom`". |
-
-Numerical values are in *characters*, here is an image to illustrate:
 
 ![ncmpcpp-ueberzug settings](img/settings_explained.png)
 
