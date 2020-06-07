@@ -8,6 +8,7 @@ padding_top=3 # These values are in characters
 padding_bottom=1
 padding_right=2
 reserved_playlist_cols=30
+force_square="false" # If "true", the cover art will downsize instead of crop
 reserved_cols_in_percent="false" # Change this if you use ncmpcpp columns mode,
                                  # see README for more info
 
@@ -99,16 +100,24 @@ compute_geometry() {
         if [ "$ueber_left" -lt "$reserved_playlist_cols" ]; then
             ueber_left=$reserved_playlist_cols
             ueber_width=$(( term_cols - reserved_playlist_cols - padding_right ))
+            if [ $force_square = "true" ]; then
+                ueber_height=$(( ueber_width * font_width / font_height ))
+            fi
         fi
         return
     fi
 
     if [ "$reserved_cols_in_percent" = "true" ]; then
-        ueber_left_in_percent=$(( ueber_left / term_cols * 100  ))
+        ueber_left_in_percent=$(calc $ueber_left / $term_cols '*' 100)
+        ueber_left_in_percent=${ueber_left_in_percent%.*}
+
         if [ "$ueber_left_in_percent" -lt "$reserved_playlist_cols" ]; then
             reserved_cols=$(( term_cols * reserved_playlist_cols / 100  ))
             ueber_left=$reserved_cols
             ueber_width=$(( term_cols - reserved_cols - padding_right ))
+            if [ $force_square = "true" ]; then
+                ueber_height=$(( ueber_width * font_width / font_height ))
+            fi
         fi
     fi
 
@@ -168,6 +177,10 @@ END
 is_font_size_successfully_computed() {
     [ -n "$term_height" ] && [ -n "$term_width" ] &&
         [ "$term_height" != "0" ] && [ "$term_width" != "0" ]
+}
+
+calc() {
+    awk "BEGIN{print $*}"
 }
 
 send_to_ueberzug() {
