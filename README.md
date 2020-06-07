@@ -8,7 +8,7 @@
 
 ### Obtaining the files
 
-Install [ueberzug](https://github.com/seebye/ueberzug). If you already have Python and pip:
+Install [ueberzug](https://github.com/seebye/ueberzug). If you already have python and pip:
 
 ```
 $ sudo pip3 install ueberzug
