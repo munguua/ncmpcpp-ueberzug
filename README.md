@@ -22,6 +22,7 @@ $ cd ncmpcpp-ueberzug
 $ chmod +x ncmpcpp-ueberzug ncmpcpp_cover_art.sh
 ```
 
+### Configuration
 Open your ncmpcpp config at `~/.ncmpcpp/config` and add this line: 
 ```toml
 execute_on_song_change="~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
@@ -43,7 +44,7 @@ Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script to 
 
 `reserved_playlist_cols` is the number of columns you want to protect from the cover image such that it will not be covered by it. [The cover image will be truncated so as not to cover that area](img/truncate_reserved_cols.gif).
 
-### Formatting the ncmpcpp songlist
+### ncmpcpp songlist formatting
 
 Set padding-top and padding-bottom as per the above image depending on what UI elements you have enabled.
 
@@ -74,12 +75,12 @@ song_list_format = "$6{%a »$4 %t$/r$R}|{%f}"
 
 ### Running `ncmpcpp-ueberzug`
 
-Now, simply run `ncmpcpp-ueberzug` to open ncmpcpp with album art enabled.
-```bash
+Simply run `ncmpcpp-ueberzug` to open ncmpcpp with album art enabled.
+```
 $ ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug
 ``` 
 You may move or symlink it somewhere in your $PATH such that using its full path is unneeded. For example:
-```bash
+```
 $ ln -s ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug ~/.local/bin/
 $ ncmpcpp-ueberzug
 ```
