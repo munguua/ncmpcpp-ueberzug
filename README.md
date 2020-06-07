@@ -41,11 +41,11 @@ Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script to 
 
 ![ncmpcpp-ueberzug settings](img/settings_explained.png)
 
-`reserved_playlist_cols` is the number of columns you want to protect from the cover image such that it will not be covered by it. [The cover image will be truncated so as not to cover that area.](img/truncate_reserved_cols.gif).
+`reserved_playlist_cols` is the number of columns you want to protect from the cover image such that it will not be covered by it. [The cover image will be truncated so as not to cover that area](img/truncate_reserved_cols.gif).
 
 ### Formatting the ncmpcpp songlist
 
-Set padding-top and padding-bottom as per the above image depending on what Ui elements you have enabled.
+Set padding-top and padding-bottom as per the above image depending on what UI elements you have enabled.
 
 If you use the default [ncmpcpp columns mode](img/ueberzug_columns_mode.gif), make sure that your columns' total width in `~/.ncmpcpp/config` is inferior to 100% and that the last column is song length `{l}`. In this example, the total is `(25)` + `(35)` + `(5)` = 65%.
 
@@ -84,9 +84,6 @@ $ ln -s ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug ~/.local/bin/
 $ ncmpcpp-ueberzug
 ```
 
-
-
-
 ## Compatibility
 
 #### Working
@@ -108,8 +105,6 @@ $ ncmpcpp-ueberzug
 * [Ueberzug script that opens the album art in a tmux pane](https://www.reddit.com/r/unixporn/comments/9bifne/ncmpcpp_with_cover_art_ueberzug_tmux_edition/)
 
 * [Fixed-geometry urxvt-compatible script using urxvt background escape codes](https://gist.github.com/vlevit/4588882)
-
-
 
 ## To-do
 * Add support for left-aligned option and tutorial on how to make it useable using ncmpcpp master-slave split.
