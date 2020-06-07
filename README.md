@@ -60,7 +60,7 @@ song_columns_list_format = "(25)[6]{a} (35)[4]{t} (5)[2]{l}"
 Here the total is `(25)` + `(35)` + `(5)` = 65%. For best results, use song length `{l}` as your last column. Next, change the `ncmpcpp_cover_art.sh` settings:
 
 ```sh
-reserved_playlist_cols=75 # Set this 5 to 10 percentage points above your columns' total
+reserved_playlist_cols=75 # Set this at least 5 percentage points above your columns' total
 reserved_cols_in_percent="true" # set this to "true"
 ```
 
