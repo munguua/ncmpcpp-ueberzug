@@ -34,6 +34,5 @@ Check out the [Setup](https://github.com/alnj/ncmpcpp-ueberzug/wiki/Setup) wiki 
 * Update columns gif with new geometry behaviour, add more illustrations
 * Add support for left-aligned option and tutorial on how to make it useable using ncmpcpp master-slave split.
 * Change cleanup mechanism to allow for several ncmpcpp-ueberzug instances
-* Support embedded album art
 * Support fetching album art from the web
 * Support Spotify album art with mopidy
