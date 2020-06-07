@@ -25,7 +25,7 @@ Check out [sacad](https://github.com/desbma/sacad) if you want to automatically 
 * `guake`, `terminology` (geometry is wrong)
 
 
-#### Similar scripts
+## Similar scripts
 * [Fixed-width, left-aligned Mopidy album art Python script using Ueberzug](https://www.reddit.com/r/unixporn/comments/addcrf/oc_mopidy_album_art_using_ueberzug/)
 
 * [Ueberzug script that opens the album art in a tmux pane](https://www.reddit.com/r/unixporn/comments/9bifne/ncmpcpp_with_cover_art_ueberzug_tmux_edition/)
