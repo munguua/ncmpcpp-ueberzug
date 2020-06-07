@@ -144,7 +144,6 @@ END
     term_width=$(awk '{print $1}' /tmp/ncmpcpp_geometry.txt)
     term_height=$(awk '{print $2}' /tmp/ncmpcpp_geometry.txt)
     rm "/tmp/ncmpcpp_geometry.txt"
-    #yad --text "py $term_height $term_width"
 
     if ! is_font_size_successfully_computed; then
         echo "Failed to guess font size, try setting it in ncmpcpp_cover_art.sh settings"
