@@ -96,7 +96,7 @@ Broken:
 
 ## Similar scripts
 
-If ncmpcpp-ueberzug doesn't meet your needs, consider these alternatices.
+If ncmpcpp-ueberzug doesn't meet your needs, consider these alternatives.
 
 * [Fixed-width, left-aligned Mopidy album art Python script using Ueberzug](https://www.reddit.com/r/unixporn/comments/addcrf/oc_mopidy_album_art_using_ueberzug/)
 
