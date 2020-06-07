@@ -44,7 +44,7 @@ Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script to 
 
 `reserved_playlist_cols` is the number of columns you want to protect from the cover image such that it will not be covered by it. [The cover image will be truncated so as not to cover that area](img/truncate_reserved_cols.gif).
 
-### ncmpcpp songlist formatting
+### Formatting the ncmpcpp songlist
 
 Set padding-top and padding-bottom as per the above image depending on what UI elements you have enabled.
 
