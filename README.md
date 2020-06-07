@@ -37,7 +37,7 @@ Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script to 
 | `reserved_playlist_cols` | Columns on the left that the cover image is not allowed to encroach on |
 | `reserved_cols_in_percent` | If set to `"false"`, `reserved_playlist_cols` will be measured in *characters*, if set to `"true"`, it will be measured in *percent of window width* |
 | `force_square="false"` | If set to `"false"`, cover art will be cropped horizontally when encroaching on `reserved_playlist_cols`; if set to `"true"`, it will downsize proportionally |
-| `square_alignment="top"` | Specifies the vertical alignment of the cover art if downsized by `forced_square`. Can be `"top"`, `"center"` or "`bottom`". |
+| `square_alignment="top"` | Specifies the vertical alignment of the cover art if downsized by `force_square`. Can be `"top"`, `"center"` or "`bottom`". |
 
 ![ncmpcpp-ueberzug settings](img/settings_explained.png)
 
