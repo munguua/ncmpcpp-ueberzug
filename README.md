@@ -46,31 +46,41 @@ Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script to 
 
 ![ncmpcpp-ueberzug settings](img/settings_explained.png)
 
-Set padding-top and padding-bottom in accordance with the UI elements you have enabled.
+Set `padding-top` and `padding-bottom` in accordance with the UI elements you have enabled.
+
+#### Classic display mode
+
+Use no right-aligned elements, or only song length. Set `padding-right` to at least `4` if you use right-aligned song length.
+```toml
+playlist_display_mode = "classic"
+# Example playlist formatting with no right-aligned element.
+song_list_format = "$6{%a »$4 %t$/r$R}|{%f}"
+# Tips:
+# - $/r stops color-reversing at that point for currently-selected item.
+# - |{%f} falls back to displaying file-name if tags are not found.
+# More info: https://github.com/ncmpcpp/ncmpcpp/blob/master/doc/config#L124
+
+
+# Alternative with only song length right-aligned
+# song_list_format = "$6{%a »$4 %t $R$l}|{%f}"
+```
+
+#### Columns display mode
 
 If you use the default [ncmpcpp columns mode](img/ueberzug_columns_mode.gif), make sure that your columns' total width in `~/.ncmpcpp/config` is inferior to 100% and that the last column is song length `{l}`. In this example, the total is `(25)` + `(35)` + `(5)` = 65%.
 
 ```toml
 playlist_display_mode = "columns"
 song_columns_list_format = "(25)[6]{a} (35)[4]{t} (5)[2]{l}"
+# Formatting: (%)[Color]{element shortname}
+# More info: https://github.com/ncmpcpp/ncmpcpp/blob/master/doc/config#L124
 ```
 
- In `ncmpcpp_cover_art.sh` settings:
+ In `ncmpcpp_cover_art.sh` settings, set `reserved_cols_in_percent` to `"true"` and `reserved_playlist_cols` to at least 5 percentage points above the total of your ncmpcpp columns.
 
 ```toml
-reserved_playlist_cols=75       # Set this at least 5 percentage points above your columns' total
-reserved_cols_in_percent="true" # set this to "true"
-```
-
-If you use the ncmpcpp classic mode, do not use right-aligned elements, or only right align song length. The default settings in `ncmpcpp_cover_art` should work fine for classic mode, but remember to adjust the top and bottom padding for your setup, and set `padding-right` to at least `4` if you use right-aligned song length.
-```toml
-# Example playlist formatting with no right-aligned element.
-# $/r stops color-reversing at that point for currently-selected item.
-# |{%f} falls back to displaying file-name if tags are not found.
-song_list_format = "$6{%a »$4 %t$/r$R}|{%f}"
-
-# Alternative with only song length right-aligned
-# song_list_format = "$6{%a »$4 %t $R$l}|{%f}"
+reserved_playlist_cols=75
+reserved_cols_in_percent="true"
 ```
 
 ### Running `ncmpcpp-ueberzug`
