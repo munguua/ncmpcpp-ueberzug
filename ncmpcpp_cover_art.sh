@@ -8,6 +8,7 @@ padding_top=3 # These values are in characters
 padding_bottom=1
 padding_right=2
 reserved_playlist_cols=30
+reserved_cols_in_percent="false"
 
 # Only set this if the geometries are wrong or ncmpcpp shouts at you to do it.
 # Visually select/highlight a character on your terminal, zoom in an image 
@@ -93,10 +94,23 @@ compute_geometry() {
     ueber_width=$(( ueber_height * font_height / font_width ))
     ueber_left=$(( term_cols - ueber_width - padding_right ))
 
-    if [ "$ueber_left" -lt "$reserved_playlist_cols" ]; then
-        ueber_left=$reserved_playlist_cols
-        ueber_width=$(( term_cols - reserved_playlist_cols - padding_right ))
+    if [ "$reserved_cols_in_percent" != "true" ]; then
+        if [ "$ueber_left" -lt "$reserved_playlist_cols" ]; then
+            ueber_left=$reserved_playlist_cols
+            ueber_width=$(( term_cols - reserved_playlist_cols - padding_right ))
+        fi
+        return
     fi
+
+    if [ "$reserved_cols_in_percent" = "true" ]; then
+        ueber_left_in_percent=$(( ueber_left / term_cols * 100  ))
+        if [ "$ueber_left_in_percent" -lt "$reserved_playlist_cols" ]; then
+            reserved_cols=$(( term_cols * reserved_playlist_cols / 100  ))
+            ueber_left=$reserved_cols
+            ueber_width=$(( term_cols - reserved_cols - padding_right ))
+        fi
+    fi
+
 }
 
 guess_font_size() {
