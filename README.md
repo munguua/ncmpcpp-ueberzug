@@ -6,6 +6,8 @@
 
 ## Setup
 
+### Obtaining the files
+
 Install [ueberzug](https://github.com/seebye/ueberzug). If you already have Python and pip:
 
 ```
@@ -34,12 +36,43 @@ Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script to 
 | `max_width` | Cover art will not expand past this limit (measured in characters) |
 | `reserved_playlist_cols` | Columns on the left that the cover image is not allowed to encroach on |
 | `reserved_cols_in_percent` | If set to `"false"`, `reserved_playlist_cols` will be measured in *characters*, if set to `"true"`, it will be measured in *percent of window width* |
-| `force_square="false"` | If set to `"false"`, cover art will be cropped horizontally when encroaching on `reserved_playlist_cols`; if set to `"true"`, it will downsize proportionally. |
+| `force_square="false"` | If set to `"false"`, cover art will be cropped horizontally when encroaching on `reserved_playlist_cols`; if set to `"true"`, it will downsize proportionally |
 | `square_alignment="top"` | Specifies the vertical alignment of the cover art if downsized by `forced_square`. Can be `"top"`, `"center"` or "`bottom`". |
 
 ![ncmpcpp-ueberzug settings](img/settings_explained.png)
 
-`reserved_playlist_cols` is the number of columns you want to protect from the cover image such that it will not be covered by it. [The cover image will be truncated so as not to cover that area.](img/truncate_reserved_cols.gif) If you use the default "columns" layout in ncmpcpp, read on to the next section.
+`reserved_playlist_cols` is the number of columns you want to protect from the cover image such that it will not be covered by it. [The cover image will be truncated so as not to cover that area.](img/truncate_reserved_cols.gif).
+
+### Formatting the ncmpcpp songlist
+
+Set padding-top and padding-bottom as per the above image depending on what Ui elements you have enabled.
+
+If you use the default [ncmpcpp columns mode](img/ueberzug_columns_mode.gif), make sure that your columns' total width in `~/.ncmpcpp/config` is inferior to 100% and that the last column is song length `{l}`. In this example, the total is `(25)` + `(35)` + `(5)` = 65%.
+
+```toml
+playlist_display_mode = "columns"
+song_columns_list_format = "(25)[6]{a} (35)[4]{t} (5)[2]{l}"
+```
+
+ In `ncmpcpp_cover_art.sh` settings:
+
+```toml
+reserved_playlist_cols=75       # Set this at least 5 percentage points above your columns' total
+reserved_cols_in_percent="true" # set this to "true"
+```
+
+If you use the ncmpcpp classic mode, do not use right-aligned elements, or only right align song length. The default settings in `ncmpcpp_cover_art` should work fine for classic mode, but remember to adjust the top and bottom padding for your setup, and set `padding-right` to at least `4` if you use right-aligned song length.
+```toml
+# Example playlist formatting with no right-aligned element.
+# $/r stops color-reversing at that point for currently-selected item.
+# |{%f} falls back to displaying file-name if tags are not found.
+song_list_format = "$6{%a »$4 %t$/r$R}|{%f}"
+
+# Alternative with only song length right-aligned
+# song_list_format = "$6{%a »$4 %t $R$l}|{%f}"
+```
+
+### Running `ncmpcpp-ueberzug`
 
 Now, simply run `ncmpcpp-ueberzug` to open ncmpcpp with album art enabled.
 ```bash
@@ -51,22 +84,7 @@ $ ln -s ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug ~/.local/bin/
 $ ncmpcpp-ueberzug
 ```
 
-### Additional steps for ncmpcpp columns mode
 
-In order for [ncmpcpp columns mode](img/ueberzug_columns_mode.gif) to work well with ncmpcpp-ueberzug, first make sure your columns' total width in `~/.ncmpcpp/config` is inferior to 100%:
-
-```toml
-song_columns_list_format = "(25)[6]{a} (35)[4]{t} (5)[2]{l}"
-```
-
-Here the total is `(25)` + `(35)` + `(5)` = 65%. For best results, use song length `{l}` as your last column. Next, change the `ncmpcpp_cover_art.sh` settings:
-
-```toml
-reserved_playlist_cols=75 # Set this at least 5 percentage points above your columns' total
-reserved_cols_in_percent="true" # set this to "true"
-```
-
-Album art should now crop and resize properly.
 
 
 ## Compatibility
