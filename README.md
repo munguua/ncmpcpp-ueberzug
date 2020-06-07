@@ -12,20 +12,20 @@ Check out [sacad](https://github.com/desbma/sacad) if you want to automatically 
 
 ## Compatibility
 
-### Working:
+#### Working:
 * `alacritty`, `st`, `urxvt`,  `kitty`, `xterm`, `lxterm`
 
-### Require manually setting character size in `ncmpcpp_cover_art.sh`:
+#### Require manually setting character size in `ncmpcpp_cover_art.sh`:
 * `cool-retro-term` 
 * `sakura` (resizing can break geometry)
 * `gnome-terminal`, `terminator`, `xfce4-terminal`  (Album art displays on the last opened terminal irrespective of which is the ncmpcpp window, resizing can break geometry)
 
-### Broken:
+#### Broken:
 * `konsole` (stops working randomly, geometry is wrong)
 * `guake`, `terminology` (geometry is wrong)
 
 
-## Similar scripts
+#### Similar scripts
 * [Fixed-width, left-aligned Mopidy album art Python script using Ueberzug](https://www.reddit.com/r/unixporn/comments/addcrf/oc_mopidy_album_art_using_ueberzug/)
 
 * [Ueberzug script that opens the album art in a tmux pane](https://www.reddit.com/r/unixporn/comments/9bifne/ncmpcpp_with_cover_art_ueberzug_tmux_edition/)
