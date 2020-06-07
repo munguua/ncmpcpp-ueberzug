@@ -7,11 +7,13 @@ fallback_image="$HOME/.ncmpcpp/ncmpcpp-ueberzug/img/fallback.png"
 padding_top=3 # These values are in characters
 padding_bottom=1
 padding_right=2
+max_width=0 # Cover art will not expand past this limit. 0 = unlimited
 reserved_playlist_cols=30
-force_square="false" # If "true", the cover art will downsize
-                     # instead of cropping horizontally
 reserved_cols_in_percent="false" # Change this if you use ncmpcpp columns mode,
                                  # see README for more info
+force_square="false" # If "true", the cover art will downsize
+                     # instead of cropping horizontally
+square_alignment="top" # top, center or bottom
 
 # Only set this if the geometries are wrong or ncmpcpp shouts at you to do it.
 # Visually select/highlight a character on your terminal, zoom in an image 
@@ -97,31 +99,39 @@ compute_geometry() {
     ueber_width=$(( ueber_height * font_height / font_width ))
     ueber_left=$(( term_cols - ueber_width - padding_right ))
 
-    if [ "$reserved_cols_in_percent" != "true" ]; then
+    if [ "$reserved_cols_in_percent" = "true" ]; then
+        ueber_left_percent=$(printf "%.0f\n" $(calc $ueber_left / $term_cols '*' 100))
+        if [ "$ueber_left_percent" -lt "$reserved_playlist_cols" ]; then
+            ueber_left=$(( term_cols * reserved_playlist_cols / 100  ))
+            ueber_width=$(( term_cols - ueber_left - padding_right ))
+        fi
+
+    else
         if [ "$ueber_left" -lt "$reserved_playlist_cols" ]; then
             ueber_left=$reserved_playlist_cols
-            ueber_width=$(( term_cols - reserved_playlist_cols - padding_right ))
-            if [ $force_square = "true" ]; then
-                ueber_height=$(( ueber_width * font_width / font_height ))
-            fi
+            ueber_width=$(( term_cols - ueber_left - padding_right ))
         fi
-        return
+
     fi
 
-    if [ "$reserved_cols_in_percent" = "true" ]; then
-        ueber_left_in_percent=$(calc $ueber_left / $term_cols '*' 100)
-        ueber_left_in_percent=${ueber_left_in_percent%.*}
-
-        if [ "$ueber_left_in_percent" -lt "$reserved_playlist_cols" ]; then
-            reserved_cols=$(( term_cols * reserved_playlist_cols / 100  ))
-            ueber_left=$reserved_cols
-            ueber_width=$(( term_cols - reserved_cols - padding_right ))
-            if [ $force_square = "true" ]; then
-                ueber_height=$(( ueber_width * font_width / font_height ))
-            fi
-        fi
+    if [ "$max_width" != 0 ] && [ "$ueber_width" -gt "$max_width" ]; then
+        ueber_width=$max_width
+        ueber_left=$(( term_cols - ueber_width - padding_right ))
     fi
 
+    if [ $force_square = "true" ]; then
+        ueber_height=$(( ueber_width * font_width / font_height ))
+        case "$square_alignment" in
+            center)
+                area=$(( term_lines - padding_top - padding_bottom ))
+                padding_top=$(( padding_top + area / 2 - ueber_height / 2  ))
+                ;;
+            bottom)
+                padding_top=$(( term_lines - padding_bottom - ueber_height ))
+                ;;
+            *) ;;
+        esac
+    fi
 }
 
 guess_font_size() {
@@ -142,6 +152,7 @@ guess_font_size() {
     font_width=$(( (term_width - 2 * term_xpadding) / term_cols ))
     font_height=$(( (term_height - 2 * term_ypadding) / term_lines ))
 }
+
 
 guess_terminal_pixelsize() {
     # We are re-using the same Python snippet that
