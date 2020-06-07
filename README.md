@@ -2,50 +2,42 @@
 
 ![ncmpcpp-ueberzug](img/demo.png)
 
-`ncmpcpp-ueberzug` is a POSIX shell script displaying ncmpcpp album art using [ueberzug](https://github.com/seebye/ueberzug). It works on `alacritty`, `st`, `urxvt`,  `kitty`, `xterm` and `lxterm`. Unlike previous scripts, it dynamically sizes and positions the cover art such that the window can be any size, even resized. It has many settings to customize the position of the album art to suit your ncmpcpp setup,
+`ncmpcpp-ueberzug` displays ncmpcpp album art using [ueberzug](https://github.com/seebye/ueberzug). It works on `alacritty`, `st`, `urxvt`,  `kitty`, `xterm` and `lxterm`. Unlike existing scripts, it dynamically sizes and positions the cover art such that the window can be any size, even resized. It has many settings to customize the position of the album art to suit your ncmpcpp setup.
 
 ## Setup
 
-First install [ueberzug](https://github.com/seebye/ueberzug). If you already have Python and pip:
+Install [ueberzug](https://github.com/seebye/ueberzug). If you already have Python and pip:
 
-```bash
+```
 $ sudo pip3 install ueberzug
 ```
 
-Navigate to your ncmpcpp config folder and clone the repository: 
-```bash
+Clone the repository into your ncmpcpp config folder and make `ncmpcpp-ueberzug` and `ncmpcpp_cover_art.sh` executable: 
+```
 $ cd ~/.ncmpcpp
 $ git clone https://github.com/alnj/ncmpcpp-ueberzug.git
-```
-
-Make `ncmpcpp-ueberzug` and `ncmpcpp_cover_art.sh` executable: 
-```bash
 $ cd ncmpcpp-ueberzug
 $ chmod +x ncmpcpp-ueberzug ncmpcpp_cover_art.sh
 ```
+
 Open your ncmpcpp config at `~/.ncmpcpp/config` and add this line: 
 ```toml
 execute_on_song_change="~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
 ```
 
 Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script to suit to your setup:
-```toml
-# How to installHow to installSETTINGS
-music_library="$HOME/music"
-fallback_image="$HOME/.ncmpcpp/ncmpcpp-ueberzug/fallback.png"
-padding_top=3 # These values are in characters
-padding_bottom=1
-padding_right=2
-max_width=0 # Cover art will not expand past this limit. 0 = unlimited
-reserved_playlist_cols=30
-reserved_cols_in_percent="false" # Change this if you use ncmpcpp columns mode,
-                                 # see README for more info
-force_square="false" # If "true", the cover art will downsize
-                     # instead of cropping horizontally
-square_alignment="top" # top, center or bottom
+| Setting | Description |
+| --- | --- |
+| `music_library` | Path to your mpd library |
+| `fallback_image` | Path to fallback image in case of no cover found |
+| `padding_top`, `padding_bottom`, `padding_right` | Padding of the cover image |
+| `max_width` | Cover art will not expand past this limit (measured in characters) |
+| `reserved_playlist_cols` | Columns on the left that the cover image is not allowed to encroach on |
+| `reserved_cols_in_percent` | If set to `"false"`, `reserved_playlist_cols` will be measured in *characters*, if set to `"true"`, it will be measured in *percent of window width* |
+| `force_square="false"` | If set to `"false"`, cover art will be cropped horizontally when encroaching on `reserved_playlist_cols`; if set to `"true"`, it will downsize proportionally. |
+| `square_alignment="top"` | Specifies the vertical alignment of the cover art if downsized by `forced_square`. Can be `"top"`, `"center"` or "`bottom`". |
 
-```
-The `padding_` and `reserved_playlist_cols` values are in *characters*, here is an image to make it easier to understand:
+Numerical values are in *characters*, here is an image to illustrate:
 
 ![ncmpcpp-ueberzug settings](img/settings_explained.png)
 
@@ -81,10 +73,10 @@ Album art should now crop and resize properly.
 
 ## Compatibility
 
-### Working
+#### Working
 * `alacritty`, `st`, `urxvt`,  `kitty`, `xterm`, `lxterm`
 
-### Require manually setting character size in `ncmpcpp_cover_art.sh`
+#### Require manually setting character size in `ncmpcpp_cover_art.sh`
 * `cool-retro-term` 
 * `sakura` (resizing can break geometry)
 * `gnome-terminal`, `terminator`, `xfce4-terminal`  (Album art displays on the last opened terminal irrespective of which is the ncmpcpp window, resizing can break geometry)
@@ -95,9 +87,6 @@ Album art should now crop and resize properly.
 
 
 ## Similar scripts
-
-If ncmpcpp-ueberzug doesn't meet your needs, consider these alternatives.
-
 * [Fixed-width, left-aligned Mopidy album art Python script using Ueberzug](https://www.reddit.com/r/unixporn/comments/addcrf/oc_mopidy_album_art_using_ueberzug/)
 
 * [Ueberzug script that opens the album art in a tmux pane](https://www.reddit.com/r/unixporn/comments/9bifne/ncmpcpp_with_cover_art_ueberzug_tmux_edition/)
@@ -107,7 +96,6 @@ If ncmpcpp-ueberzug doesn't meet your needs, consider these alternatives.
 
 
 ## To-do
-
 * Change cleanup mechanism to allow for several ncmpcpp-ueberzug instances
 * Support embedded album art
 * Support fetching album art from the web
