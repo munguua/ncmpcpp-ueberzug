@@ -94,13 +94,6 @@ Broken:
 * `guake`, `terminology` (geometry is wrong)
 
 
-## To-do
-
-* Change cleanup mechanism to allow for several ncmpcpp-ueberzug instances
-* Support embedded album art
-* Support fetching album art from the web
-* Support Spotify album art with mopidy
-
 ## Similar scripts
 
 If ncmpcpp-ueberzug doesn't meet your needs, consider these alternatices.
@@ -110,3 +103,13 @@ If ncmpcpp-ueberzug doesn't meet your needs, consider these alternatices.
 * [Ueberzug script that opens the album art in a tmux pane](https://www.reddit.com/r/unixporn/comments/9bifne/ncmpcpp_with_cover_art_ueberzug_tmux_edition/)
 
 * [Fixed-geometry urxvt-compatible script using urxvt background escape codes](https://gist.github.com/vlevit/4588882)
+
+
+
+## To-do
+
+* Change cleanup mechanism to allow for several ncmpcpp-ueberzug instances
+* Support embedded album art
+* Support fetching album art from the web
+* Support Spotify album art with mopidy
+* Update columns gif with new geometry behaviour
