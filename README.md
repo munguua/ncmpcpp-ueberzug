@@ -6,7 +6,7 @@
 
 ## How to install
 
-First install [Ueberzug](https://github.com/seebye/ueberzug) as per the official instructions.
+First install [ueberzug](https://github.com/seebye/ueberzug) as per the official instructions.
 
 Navigate to your ncmpcpp config folder and clone the repository: 
 ```sh
