@@ -32,11 +32,14 @@ fallback_image="$HOME/.ncmpcpp/ncmpcpp-ueberzug/fallback.png"
 padding_top=3 # These values are in characters
 padding_bottom=1
 padding_right=2
+max_width=0 # Cover art will not expand past this limit. 0 = unlimited
 reserved_playlist_cols=30
-force_square="false" # If "true", the cover art will downsize
-                     # instead of cropping horizontally
 reserved_cols_in_percent="false" # Change this if you use ncmpcpp columns mode,
                                  # see README for more info
+force_square="false" # If "true", the cover art will downsize
+                     # instead of cropping horizontally
+square_alignment="top" # top, center or bottom
+
 ```
 The `padding_` and `reserved_playlist_cols` values are in *characters*, here is an image to make it easier to understand:
 ![ncmpcpp-ueberzug settings](img/settings_explained.png)
