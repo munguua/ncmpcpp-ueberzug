@@ -10,15 +10,15 @@ Check out the [Setup](https://github.com/alnj/ncmpcpp-ueberzug/wiki/Setup) wiki 
 
 ## Compatibility
 
-#### Working
+### Working:
 * `alacritty`, `st`, `urxvt`,  `kitty`, `xterm`, `lxterm`
 
-#### Require manually setting character size in `ncmpcpp_cover_art.sh`
+### Require manually setting character size in `ncmpcpp_cover_art.sh`:
 * `cool-retro-term` 
 * `sakura` (resizing can break geometry)
 * `gnome-terminal`, `terminator`, `xfce4-terminal`  (Album art displays on the last opened terminal irrespective of which is the ncmpcpp window, resizing can break geometry)
 
-#### Broken
+### Broken:
 * `konsole` (stops working randomly, geometry is wrong)
 * `guake`, `terminology` (geometry is wrong)
 
