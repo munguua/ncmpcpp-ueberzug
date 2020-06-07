@@ -50,7 +50,7 @@ Set `padding-top` and `padding-bottom` in accordance with the UI elements you ha
 
 #### Classic display mode
 
-Use no right-aligned elements, or only song length. Set `padding-right` to at least `4` if you use right-aligned song length.
+Use no right-aligned element, or only song length. Set `padding-right` to at least `4` if you use right-aligned song length.
 ```toml
 playlist_display_mode = "classic"
 # Example playlist formatting with no right-aligned element.
