@@ -34,6 +34,5 @@ Check out [sacad](https://github.com/desbma/sacad) if you want to automatically 
 
 ## TODO
 * Update columns gif with new geometry behaviour, add more illustrations
-* Add support for left-aligned option and tutorial on how to make it useable using ncmpcpp master-slave split.
 * Change cleanup mechanism to allow for several ncmpcpp-ueberzug instances
 * Support Spotify album art with mopidy
