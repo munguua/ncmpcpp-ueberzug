@@ -4,16 +4,14 @@
 # SETTINGS
 music_library="$HOME/music"
 fallback_image="$HOME/.ncmpcpp/ncmpcpp-ueberzug/img/fallback.png"
-padding_top=3 # These values are in characters
+padding_top=3
 padding_bottom=1
 padding_right=2
-max_width=0 # Cover art will not expand past this limit. 0 = unlimited
+max_width=0
 reserved_playlist_cols=30
-reserved_cols_in_percent="false" # Change this if you use ncmpcpp columns mode,
-                                 # see README for more info
-force_square="false" # If "true", the cover art will downsize
-                     # instead of cropping horizontally
-square_alignment="top" # top, center or bottom
+reserved_cols_in_percent="false"
+force_square="false"
+square_alignment="top"
 
 # Only set this if the geometries are wrong or ncmpcpp shouts at you to do it.
 # Visually select/highlight a character on your terminal, zoom in an image 
@@ -40,19 +38,30 @@ kill_previous_instances() {
 }
 
 find_cover_image() {
+
+    # First we check if the audio file has an embedded album art
+    ext="$(mpc --format $music_library/%file% | head -n 1 | sed 's/^.*\.//')"
+    if [ "$ext" = "flac" ]; then
+        # since FFMPEG cannot export embedded FLAC art we use metaflac
+        metaflac --export-picture-to=/tmp/mpd_cover.jpg \
+            "$(mpc --format $music_library/%file% | head -n 1)" &&
+            cover_path="/tmp/mpd_cover.jpg" && return
+    else
+        ffmpeg -y -i "$(mpc --format $music_library/%file% | head -n 1)" \
+            /tmp/mpd_cover.jpg &&
+            cover_path="/tmp/mpd_cover.jpg" && return
+    fi
+
+    # If no embedded art was found we look inside the music file's directory
     album="$(mpc --format %album% current)"
     file="$(mpc --format %file% current)"
     album_dir="${file%/*}"
-
-    if [ -z "$album_dir" ]; then
-        exit 1
-    fi
-
     album_dir="$music_library/$album_dir"
     found_covers="$(find "$album_dir" -type d -exec find {} -maxdepth 1 -type f \
     -iregex ".*/.*\(${album}\|cover\|folder\|artwork\|front\).*[.]\\(jpe?g\|png\|gif\|bmp\)" \; )"
     cover_path="$(echo "$found_covers" | head -n1)"
 
+    # If we still failed to find a cover image, we use the fallback
     if [ -z "$cover_path" ]; then
         cover_path=$fallback_image
     fi
@@ -152,7 +161,6 @@ guess_font_size() {
     font_width=$(( (term_width - 2 * term_xpadding) / term_cols ))
     font_height=$(( (term_height - 2 * term_ypadding) / term_lines ))
 }
-
 
 guess_terminal_pixelsize() {
     # We are re-using the same Python snippet that
