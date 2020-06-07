@@ -40,13 +40,13 @@ Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script to 
 | `force_square="false"` | If set to `"false"`, cover art will be cropped horizontally when encroaching on `reserved_playlist_cols`; if set to `"true"`, it will downsize proportionally |
 | `square_alignment="top"` | Specifies the vertical alignment of the cover art if downsized by `force_square`. Can be `"top"`, `"center"` or "`bottom`". |
 
-![ncmpcpp-ueberzug settings](img/settings_explained.png)
-
 `reserved_playlist_cols` is the number of columns you want to protect from the cover image such that it will not be covered by it. [The cover image will be truncated so as not to cover that area](img/truncate_reserved_cols.gif).
 
 ### Formatting the ncmpcpp songlist
 
-Set padding-top and padding-bottom as per the above image depending on what UI elements you have enabled.
+![ncmpcpp-ueberzug settings](img/settings_explained.png)
+
+Set padding-top and padding-bottom in accordance with the UI elements you have enabled.
 
 If you use the default [ncmpcpp columns mode](img/ueberzug_columns_mode.gif), make sure that your columns' total width in `~/.ncmpcpp/config` is inferior to 100% and that the last column is song length `{l}`. In this example, the total is `(25)` + `(35)` + `(5)` = 65%.
 
