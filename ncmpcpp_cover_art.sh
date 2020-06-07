@@ -6,12 +6,15 @@ music_library="$HOME/music"
 fallback_image="$HOME/.ncmpcpp/ncmpcpp-ueberzug/img/fallback.png"
 padding_top=3
 padding_bottom=1
-padding_right=2
+padding_right=1
 max_width=0
 reserved_playlist_cols=30
 reserved_cols_in_percent="false"
 force_square="false"
 square_alignment="top"
+
+left_aligned="false"
+padding_left=
 
 # Only set this if the geometries are wrong or ncmpcpp shouts at you to do it.
 # Visually select/highlight a character on your terminal, zoom in an image 
@@ -40,14 +43,14 @@ kill_previous_instances() {
 find_cover_image() {
 
     # First we check if the audio file has an embedded album art
-    ext="$(mpc --format $music_library/%file% | head -n 1 | sed 's/^.*\.//')"
+    ext="$(mpc --format %file% current | sed 's/^.*\.//')"
     if [ "$ext" = "flac" ]; then
         # since FFMPEG cannot export embedded FLAC art we use metaflac
         metaflac --export-picture-to=/tmp/mpd_cover.jpg \
-            "$(mpc --format $music_library/%file% | head -n 1)" &&
+            "$(mpc --format %file% current)" &&
             cover_path="/tmp/mpd_cover.jpg" && return
     else
-        ffmpeg -y -i "$(mpc --format $music_library/%file% | head -n 1)" \
+        ffmpeg -y -i "$(mpc --format "$music_library"/%file% | head -n 1)" \
             /tmp/mpd_cover.jpg &&
             cover_path="/tmp/mpd_cover.jpg" && return
     fi
@@ -60,6 +63,9 @@ find_cover_image() {
     found_covers="$(find "$album_dir" -type d -exec find {} -maxdepth 1 -type f \
     -iregex ".*/.*\(${album}\|cover\|folder\|artwork\|front\).*[.]\\(jpe?g\|png\|gif\|bmp\)" \; )"
     cover_path="$(echo "$found_covers" | head -n1)"
+    if [ -n "$cover_path" ]; then
+        return
+    fi
 
     # If we still failed to find a cover image, we use the fallback
     if [ -z "$cover_path" ]; then
@@ -108,13 +114,35 @@ compute_geometry() {
     ueber_width=$(( ueber_height * font_height / font_width ))
     ueber_left=$(( term_cols - ueber_width - padding_right ))
 
+    if [ "$left_aligned" = "true" ]; then
+        compute_geometry_left_aligned
+    else
+        compute_geometry_right_aligned
+    fi
+}
+
+compute_geometry_left_aligned() {
+    compute_geometry_common
+
+    ueber_left=$padding_left
+    max_width_chars=$(( term_cols * max_width / 100 ))
+    if [ "$max_width" != 0 ] &&
+        [ $(( ueber_width + padding_right + padding_left )) -gt "$max_width_chars" ]; then
+        ueber_width=$(( max_width_chars - padding_left - padding_right ))
+    fi
+
+    apply_force_square_setting
+}
+
+compute_geometry_right_aligned() {
+    compute_geometry_common
+
     if [ "$reserved_cols_in_percent" = "true" ]; then
-        ueber_left_percent=$(printf "%.0f\n" $(calc $ueber_left / $term_cols '*' 100))
+        ueber_left_percent=$(printf "%.0f\n" $(calc "$ueber_left" / "$term_cols" '*' 100))
         if [ "$ueber_left_percent" -lt "$reserved_playlist_cols" ]; then
             ueber_left=$(( term_cols * reserved_playlist_cols / 100  ))
             ueber_width=$(( term_cols - ueber_left - padding_right ))
         fi
-
     else
         if [ "$ueber_left" -lt "$reserved_playlist_cols" ]; then
             ueber_left=$reserved_playlist_cols
@@ -128,6 +156,10 @@ compute_geometry() {
         ueber_left=$(( term_cols - ueber_width - padding_right ))
     fi
 
+    apply_force_square_setting
+}
+
+apply_force_square_setting() {
     if [ $force_square = "true" ]; then
         ueber_height=$(( ueber_width * font_width / font_height ))
         case "$square_alignment" in
@@ -198,6 +230,7 @@ is_font_size_successfully_computed() {
     [ -n "$term_height" ] && [ -n "$term_width" ] &&
         [ "$term_height" != "0" ] && [ "$term_width" != "0" ]
 }
+
 
 calc() {
     awk "BEGIN{print $*}"
