@@ -2,8 +2,6 @@
 
 ![ncmpcpp-ueberzug](img/demo.png)
 
-**This is a work in progress! Not ready for distribution.**
-
 `ncmpcpp-ueberzug` is a POSIX shell script displaying ncmpcpp album art using [ueberzug](https://github.com/seebye/ueberzug). It works on `alacritty`, `st`, `urxvt`,  `kitty`, `xterm` and `lxterm`.
 
 ## How to install
@@ -54,7 +52,7 @@ Known to work:
 Require manually setting character size in `ncmpcpp_cover_art.sh`:
 * `cool-retro-term` 
 * `sakura` (resizing can break geometry)
-* `gnome-terminal`, `terminator`, `xfce4-terminal`  (Image displays on the last opened terminal irrespective of which is the ncmpcpp window, resizing can result in slightly incorrect geometry)
+* `gnome-terminal`, `terminator`, `xfce4-terminal`  (Album art displays on the last opened terminal irrespective of which is the ncmpcpp window, resizing can break geometry)
 
 Broken:
 * `konsole` (stops working randomly, geometry is wrong)
