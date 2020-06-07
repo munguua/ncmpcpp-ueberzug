@@ -112,6 +112,7 @@ $ ncmpcpp-ueberzug
 
 
 ## To-do
+* Add support for left-aligned option and tutorial on how to make it useable using ncmpcpp master-slave split.
 * Change cleanup mechanism to allow for several ncmpcpp-ueberzug instances
 * Support embedded album art
 * Support fetching album art from the web
