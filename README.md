@@ -39,7 +39,11 @@ The `padding_` and `reserved_playlist_cols` values are in *characters*, here is 
 
 `reserved_playlist_cols` is the number of columns you want to protect from the cover image such that it will not be covered by it. [The cover image will be truncated so as not to cover that area.](img/truncate_reserved_cols.gif)
 
-Now, simply run `./ncmpcpp-ueberzug` or `~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug` to open ncmpcpp with album art enabled. If you want to be able to run just `ncmpcpp-ueberzug` instead of its full path, move or symlink it somewhere in your $PATH, for example:
+Now, simply run:
+```
+$ ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug
+``` 
+to open ncmpcpp with album art enabled. If you want to be able to run just `ncmpcpp-ueberzug` instead of its full path, move or symlink it somewhere in your $PATH, for example:
 ```sh
 ln -s ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug ~/.local/bin/
 ```
