@@ -81,3 +81,10 @@ Broken:
 * `konsole` (stops working randomly, geometry is wrong)
 * `guake`, `terminology` (geometry is wrong)
 
+
+## To-do
+
+* Support embedded album art
+* Support fetching album art from the web
+* Force square option
+
