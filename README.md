@@ -33,6 +33,7 @@ padding_top=3 # These values are in characters
 padding_bottom=1
 padding_right=2
 reserved_playlist_cols=30
+reserved_cols_in_percent="false" # Change this if you use ncmpcpp columns mode, see next section
 ```
 The `padding_` and `reserved_playlist_cols` values are in *characters*, here is an image to make it easier to understand:
 ![ncmpcpp-ueberzug settings](img/settings_explained.png)
@@ -47,6 +48,24 @@ to open ncmpcpp with album art enabled. If you want to be able to run just `ncmp
 ```sh
 ln -s ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug ~/.local/bin/
 ```
+
+## Setup for ncmpcpp columns mode users
+
+In order for [ncmpcpp columns mode](img/ueberzug_columns_mode.gif) to work well with ncmpcpp-ueberzug, first make sure the total width in % is inferior to 100:
+
+```
+song_columns_list_format = "(25)[6]{a} (35)[4]{t} (5)[2]{l}"
+```
+
+Here the total is `(25)` + `(35)` + `(5)`, so 65%. For best results, use song length `{l}` as your last column. Next, change the `ncmpcpp_cover_art.sh` settings:
+
+```sh
+reserved_playlist_cols=75 # Set this 5 to 10 percentage points above your columns' total
+reserved_cols_in_percent="true" # set this to "true"
+```
+
+Album art should now crop and resize properly.
+
 
 ## Compatibility
 
