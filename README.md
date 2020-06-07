@@ -49,7 +49,7 @@ to open ncmpcpp with album art enabled. If you want to be able to run just `ncmp
 ln -s ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug ~/.local/bin/
 ```
 
-## Setup for ncmpcpp columns mode users
+## Additional steps for ncmpcpp columns mode users (ncmpcpp default layout)
 
 In order for [ncmpcpp columns mode](img/ueberzug_columns_mode.gif) to work well with ncmpcpp-ueberzug, first make sure your columns' total width in `~/.ncmpcpp/config` is inferior to 100%:
 
