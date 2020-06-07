@@ -89,3 +89,4 @@ Broken:
 
 * Support embedded album art
 * Support fetching album art from the web
+* Support Spotify album art with mopidy
