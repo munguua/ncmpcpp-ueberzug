@@ -8,7 +8,8 @@ padding_top=3 # These values are in characters
 padding_bottom=1
 padding_right=2
 reserved_playlist_cols=30
-force_square="false" # If "true", the cover art will downsize instead of crop
+force_square="false" # If "true", the cover art will downsize
+                     # instead of cropping horizontally
 reserved_cols_in_percent="false" # Change this if you use ncmpcpp columns mode,
                                  # see README for more info
 
