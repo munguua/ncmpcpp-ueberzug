@@ -51,13 +51,13 @@ ln -s ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug ~/.local/bin/
 
 ## Setup for ncmpcpp columns mode users
 
-In order for [ncmpcpp columns mode](img/ueberzug_columns_mode.gif) to work well with ncmpcpp-ueberzug, first make sure the total width in % is inferior to 100:
+In order for [ncmpcpp columns mode](img/ueberzug_columns_mode.gif) to work well with ncmpcpp-ueberzug, first make sure your columns' total width in is inferior to 100%:
 
 ```
 song_columns_list_format = "(25)[6]{a} (35)[4]{t} (5)[2]{l}"
 ```
 
-Here the total is `(25)` + `(35)` + `(5)`, so 65%. For best results, use song length `{l}` as your last column. Next, change the `ncmpcpp_cover_art.sh` settings:
+Here the total is `(25)` + `(35)` + `(5)` = 65%. For best results, use song length `{l}` as your last column. Next, change the `ncmpcpp_cover_art.sh` settings:
 
 ```sh
 reserved_playlist_cols=75 # Set this 5 to 10 percentage points above your columns' total
