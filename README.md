@@ -51,7 +51,7 @@ ln -s ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug ~/.local/bin/
 
 ## Setup for ncmpcpp columns mode users
 
-In order for [ncmpcpp columns mode](img/ueberzug_columns_mode.gif) to work well with ncmpcpp-ueberzug, first make sure your columns' total width in is inferior to 100%:
+In order for [ncmpcpp columns mode](img/ueberzug_columns_mode.gif) to work well with ncmpcpp-ueberzug, first make sure your columns' total width is inferior to 100%:
 
 ```
 song_columns_list_format = "(25)[6]{a} (35)[4]{t} (5)[2]{l}"
