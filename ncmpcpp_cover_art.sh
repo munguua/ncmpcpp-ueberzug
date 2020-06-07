@@ -82,7 +82,6 @@ compute_geometry() {
     unset LINES COLUMNS # Required in order for tput to work in a script
     term_lines=$(tput lines)
     term_cols=$(tput cols)
-    #dunstify "computing. font $font_height $font_width cols $term_cols lines $term_lines"
     if [ -z "$font_height" ] || [ -z "$font_height" ]; then
         guess_font_size
     fi
@@ -98,12 +97,11 @@ compute_geometry() {
         ueber_left=$reserved_playlist_cols
         ueber_width=$(( term_cols - reserved_playlist_cols - padding_right ))
     fi
-    #dunstify "twidth is $term_cols, cwidth is $ueber_width, cleft is $ueber_left, theight is $term_lines, cheight is $ueber_height, ctop is $padding_top"
 }
 
 guess_font_size() {
     # A font width and height estimate is required to
-    # properly compute the Ueberzug width (in columns).
+    # properly compute the cover width (in columns).
     # We are reproducing the arithmetic used by Ueberzug
     # to guess font size.
     # https://github.com/seebye/ueberzug/blob/master/ueberzug/terminal.py#L24
@@ -121,14 +119,11 @@ guess_font_size() {
 }
 
 guess_terminal_pixelsize() {
-    #yad --text "$term_height $term_width"
     # We are re-using the same Python snippet that
     # Ueberzug utilizes to retrieve terminal window size.
-    # wmctrl/xdotool/xwininfo-based/escape-based solutions
-    # are all unreliable and not all faster.
     # https://github.com/seebye/ueberzug/blob/master/ueberzug/terminal.py#L10
 
-    python <<'    END'
+    python <<END
 import sys, struct, fcntl, termios
 
 def get_geometry():
@@ -142,7 +137,7 @@ output = get_geometry()
 f = open("/tmp/ncmpcpp_geometry.txt", "w")
 f.write(output)
 f.close()
-    END
+END
 
     # ioctl doesn't work inside $() for some reason so we
     # must use a temporary file
@@ -151,43 +146,9 @@ f.close()
     rm "/tmp/ncmpcpp_geometry.txt"
     #yad --text "py $term_height $term_width"
 
-    if is_font_size_successfully_computed; then
-        echo "py $term_width $term_height $$"
-        return
+    if ! is_font_size_successfully_computed; then
+        echo "Failed to guess font size, try setting it in ncmpcpp_cover_art.sh settings"
     fi
-
-    # If the Python method doesn't work, chances are
-    # that Ueberzug will be broken on that terminal,
-    # but we provide two alternate methods as 
-#    if is_installed wmctrl; then
-        #term_width=$(wmctrl -lG |
-            #awk '$8 == "ncmpcpp" && $9=="" {print $5; exit}')
-        #term_height=$(wmctrl -lG |
-            #awk '$8 == "ncmpcpp" && $9=="" {print $6; exit}')
-
-        #if is_font_size_successfully_computed; then
-            #echo "wmctrl $term_width $term_height $$"
-            #return
-        #fi
-    #fi
-
-    #if is_installed xdotool; then
-        #term_windowid=$(xdotool search --name "ncmpcpp")
-        #term_geometry=$(xdotool getwindowgeometry "$term_windowid")
-        #term_width=$(echo "$term_geometry" | awk -F"[ x]" 'NR==3{print $4}')
-        #term_height=$(echo "$term_geometry" | awk -F"[ x]" 'NR==3{print $5}')
-        #if is_font_size_successfully_computed; then
-            #echo "xdotool $term_width $term_height $$"
-            #return
-        #fi
-    #fi
-        if ! is_font_size_successfully_computed; then
-            echo "Failed to guess font size, try setting it in ncmpcpp_cover_art.sh settings"
-        fi
-}
-
-is_installed() {
-    type $1 >/dev/null 2>&1
 }
 
 is_font_size_successfully_computed() {
