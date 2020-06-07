@@ -3,12 +3,13 @@
 
 # SETTINGS
 music_library="$HOME/music"
-fallback_image="$HOME/.ncmpcpp/ncmpcpp-ueberzug/fallback.png"
+fallback_image="$HOME/.ncmpcpp/ncmpcpp-ueberzug/img/fallback.png"
 padding_top=3 # These values are in characters
 padding_bottom=1
 padding_right=2
 reserved_playlist_cols=30
-reserved_cols_in_percent="false"
+reserved_cols_in_percent="false" # Change this if you use ncmpcpp columns mode,
+                                 # see README for more info
 
 # Only set this if the geometries are wrong or ncmpcpp shouts at you to do it.
 # Visually select/highlight a character on your terminal, zoom in an image 
