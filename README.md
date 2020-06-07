@@ -4,9 +4,11 @@
 
 `ncmpcpp-ueberzug` displays ncmpcpp album art using [ueberzug](https://github.com/seebye/ueberzug). It works on `alacritty`, `st`, `urxvt`,  `kitty`, `xterm` and `lxterm`. Unlike existing scripts, it dynamically sizes and positions the cover art such that the window can be any size, even resized. It has many settings to customize the position of the album art to suit your ncmpcpp setup.
 
-## Setup
+## Install
 
-Check out the [Setup](https://github.com/alnj/ncmpcpp-ueberzug/wiki/Setup) wiki page.
+Follow the instructions on the [Setup](https://github.com/alnj/ncmpcpp-ueberzug/wiki/Setup) wiki page.
+
+Check out [sacad](https://github.com/desbma/sacad) if you want to automatically download cover art for your music library.
 
 ## Compatibility
 
@@ -34,5 +36,4 @@ Check out the [Setup](https://github.com/alnj/ncmpcpp-ueberzug/wiki/Setup) wiki 
 * Update columns gif with new geometry behaviour, add more illustrations
 * Add support for left-aligned option and tutorial on how to make it useable using ncmpcpp master-slave split.
 * Change cleanup mechanism to allow for several ncmpcpp-ueberzug instances
-* Support fetching album art from the web
 * Support Spotify album art with mopidy
