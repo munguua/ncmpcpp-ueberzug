@@ -2,11 +2,15 @@
 
 ![ncmpcpp-ueberzug](img/demo.png)
 
-`ncmpcpp-ueberzug` is a POSIX shell script displaying ncmpcpp album art using [ueberzug](https://github.com/seebye/ueberzug). It works on `alacritty`, `st`, `urxvt`,  `kitty`, `xterm` and `lxterm`.
+`ncmpcpp-ueberzug` is a POSIX shell script displaying ncmpcpp album art using [ueberzug](https://github.com/seebye/ueberzug). It works on `alacritty`, `st`, `urxvt`,  `kitty`, `xterm` and `lxterm`. Unlike previous scripts, it dynamically sizes and positions the cover art such that the window can be any size, even resized. It has many settings to customize the position of the album art to suit your ncmpcpp setup,
 
-## How to install
+## Setup
 
-First install [ueberzug](https://github.com/seebye/ueberzug) as per the official instructions.
+First install [ueberzug](https://github.com/seebye/ueberzug). If you already have Python and pip:
+
+```bash
+$ sudo pip3 install ueberzug
+```
 
 Navigate to your ncmpcpp config folder and clone the repository: 
 ```bash
@@ -26,7 +30,7 @@ execute_on_song_change="~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
 
 Open `ncmpcpp_cover_art.sh` and adjust the settings at the top of the script to suit to your setup:
 ```toml
-# SETTINGS
+# How to installHow to installSETTINGS
 music_library="$HOME/music"
 fallback_image="$HOME/.ncmpcpp/ncmpcpp-ueberzug/fallback.png"
 padding_top=3 # These values are in characters
@@ -42,9 +46,10 @@ square_alignment="top" # top, center or bottom
 
 ```
 The `padding_` and `reserved_playlist_cols` values are in *characters*, here is an image to make it easier to understand:
+
 ![ncmpcpp-ueberzug settings](img/settings_explained.png)
 
-`reserved_playlist_cols` is the number of columns you want to protect from the cover image such that it will not be covered by it. [The cover image will be truncated so as not to cover that area.](img/truncate_reserved_cols.gif)
+`reserved_playlist_cols` is the number of columns you want to protect from the cover image such that it will not be covered by it. [The cover image will be truncated so as not to cover that area.](img/truncate_reserved_cols.gif) If you use the default "columns" layout in ncmpcpp, read on to the next section.
 
 Now, simply run:
 ```bash
@@ -55,7 +60,7 @@ to open ncmpcpp with album art enabled. If you want to be able to run just `ncmp
 $ ln -s ~/.ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug ~/.local/bin/
 ```
 
-## Additional steps for ncmpcpp columns mode users (ncmpcpp default layout)
+### Additional steps for ncmpcpp columns mode
 
 In order for [ncmpcpp columns mode](img/ueberzug_columns_mode.gif) to work well with ncmpcpp-ueberzug, first make sure your columns' total width in `~/.ncmpcpp/config` is inferior to 100%:
 
@@ -94,3 +99,13 @@ Broken:
 * Support embedded album art
 * Support fetching album art from the web
 * Support Spotify album art with mopidy
+
+## Similar scripts
+
+If ncmpcpp-ueberzug doesn't meet your needs, consider these alternatices.
+
+* [Fixed-width, left-aligned Mopidy album art Python script using Ueberzug](https://www.reddit.com/r/unixporn/comments/addcrf/oc_mopidy_album_art_using_ueberzug/)
+
+* [Ueberzug script that opens the album art in a tmux pane](https://www.reddit.com/r/unixporn/comments/9bifne/ncmpcpp_with_cover_art_ueberzug_tmux_edition/)
+
+* [Fixed-geometry urxvt-compatible script using urxvt background escape codes](https://gist.github.com/vlevit/4588882)
