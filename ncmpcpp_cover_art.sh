@@ -13,14 +13,14 @@ reserved_cols_in_percent="false"
 force_square="false"
 square_alignment="top"
 
-left_aligned="true"
+left_aligned="false"
 padding_left=1
 
 # Only set this if the geometries are wrong or ncmpcpp shouts at you to do it.
 # Visually select/highlight a character on your terminal, zoom in an image 
 # editor and count how many pixels a character's width and height are.
-font_height=16
-font_width=7
+font_height=
+font_width=
 
 main() {
     kill_previous_instances >/dev/null 2>&1
