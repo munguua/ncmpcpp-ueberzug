@@ -47,7 +47,7 @@ find_cover_image() {
     if [ "$ext" = "flac" ]; then
         # since FFMPEG cannot export embedded FLAC art we use metaflac
         metaflac --export-picture-to=/tmp/mpd_cover.jpg \
-            "$(mpc --format "$music_library"%file% current)" &&
+            "$(mpc --format "$music_library"/%file% current)" &&
             cover_path="/tmp/mpd_cover.jpg" && return
     else
         ffmpeg -y -i "$(mpc --format "$music_library"/%file% | head -n 1)" \
