@@ -7,20 +7,20 @@ fallback_image="$HOME/.ncmpcpp/ncmpcpp-ueberzug/img/fallback.png"
 padding_top=3
 padding_bottom=1
 padding_right=1
-max_width=30
+max_width=0
 reserved_playlist_cols=30
 reserved_cols_in_percent="false"
 force_square="false"
 square_alignment="top"
 
-left_aligned="true"
+left_aligned="false"
 padding_left=1
 
 # Only set this if the geometries are wrong or ncmpcpp shouts at you to do it.
 # Visually select/highlight a character on your terminal, zoom in an image 
 # editor and count how many pixels a character's width and height are.
-font_height=16
-font_width=7
+font_height=
+font_width=
 
 main() {
     kill_previous_instances >/dev/null 2>&1
@@ -47,7 +47,7 @@ find_cover_image() {
     if [ "$ext" = "flac" ]; then
         # since FFMPEG cannot export embedded FLAC art we use metaflac
         metaflac --export-picture-to=/tmp/mpd_cover.jpg \
-            "$(mpc --format %file% current)" &&
+            "$(mpc --format "$music_library"%file% current)" &&
             cover_path="/tmp/mpd_cover.jpg" && return
     else
         ffmpeg -y -i "$(mpc --format "$music_library"/%file% | head -n 1)" \
@@ -119,6 +119,8 @@ compute_geometry() {
     else
         compute_geometry_right_aligned
     fi
+
+    apply_force_square_setting
 }
 
 compute_geometry_left_aligned() {
@@ -128,8 +130,6 @@ compute_geometry_left_aligned() {
         [ $(( ueber_width + padding_right + padding_left )) -gt "$max_width_chars" ]; then
         ueber_width=$(( max_width_chars - padding_left - padding_right ))
     fi
-
-    apply_force_square_setting
 }
 
 compute_geometry_right_aligned() {
@@ -151,8 +151,6 @@ compute_geometry_right_aligned() {
         ueber_width=$max_width
         ueber_left=$(( term_cols - ueber_width - padding_right ))
     fi
-
-    apply_force_square_setting
 }
 
 apply_force_square_setting() {
