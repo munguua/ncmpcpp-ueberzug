@@ -4,6 +4,8 @@
 
 `ncmpcpp-ueberzug` displays ncmpcpp album art using [ueberzug](https://github.com/seebye/ueberzug). It works on `alacritty`, `st`, `urxvt`,  `kitty`, `xterm` and `lxterm`. Unlike existing scripts, it dynamically sizes and positions the cover art such that the window can be any size, even resized. It has many settings to customize the position of the album art to suit your ncmpcpp setup.
 
+**ncmpcpp-ueberzug is currently gradually being improved, expect more features in each version but also potential changes in how settings work. By June 14th, 2020 I expect this script to be feature-complete.**
+
 ## Install
 
 Follow the instructions on the [Setup](https://github.com/alnj/ncmpcpp-ueberzug/wiki/Setup) wiki page.
