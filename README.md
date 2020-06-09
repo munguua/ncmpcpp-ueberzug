@@ -35,7 +35,9 @@ Check out [sacad](https://github.com/desbma/sacad) if you want to automatically 
 * [Fixed-geometry urxvt-compatible script using urxvt background escape codes](https://gist.github.com/vlevit/4588882)
 
 ## TODO
-* Update columns gif with new geometry behaviour, add more illustrations
+
 * Refactor alignment settings / Add alignment/scaling options for left-align
+* Try out toggle?
+* Update columns gif with new geometry behaviour, add more illustrations
 * Change cleanup mechanism to allow for several ncmpcpp-ueberzug instances
 * Support Spotify album art with mopidy
