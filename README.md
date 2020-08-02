@@ -15,7 +15,8 @@ Check out [sacad](https://github.com/desbma/sacad) if you want to automatically 
 ## Compatibility
 
 #### Working:
-* `alacritty`, `st`, `urxvt`,  `kitty`, `xterm`, `lxterm`
+* `alacritty`, `st`, `urxvt`, `xterm`, `lxterm`
+* `kitty` (might use wrong terminal if using `--single-instance` flag)
 
 #### Require manually setting character size in `ncmpcpp_cover_art.sh`:
 * `cool-retro-term` 
